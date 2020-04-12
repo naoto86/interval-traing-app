@@ -10,13 +10,15 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "storybook:ios": "cp -r index.storybook.js index.js && npx react-native run-ios",
     "storybook:android": "cp -r index.storybook.js index.js && react-native run-android",
-    "storybook-server": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook"
+    "storybook-server": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook",
+    "prestorybook-server": "rnstl"
   },
   "dependencies": {
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-elements": "^1.2.7",
-    "react-native-navigation": "^6.4.0"
+    "react-native-navigation": "^6.4.0",
+    "react-native-storybook-loader": "^1.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -52,5 +54,14 @@
       "json",
       "node"
     ]
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src"
+      ],
+      "pattern": "**/stories.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   }
 }
