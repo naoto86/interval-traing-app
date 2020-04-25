@@ -7,114 +7,93 @@
  *
  * @format
  */
-import 'react-native-gesture-handler';
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import * as React from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-declare var global: {HermesInternal: null | {}};
-
-const App = () => {
+const HomeScreen = ({navigation}) => {
   return (
-    <NavigationContainer>
-      <>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-            <Header />
-            {global.HermesInternal == null ? null : (
-              <View style={styles.engine}>
-                <Text style={styles.footer}>Engine: Hermes</Text>
-              </View>
-            )}
-            <View style={styles.body}>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Step One</Text>
-                <Text style={styles.sectionDescription}>
-                  Edit <Text style={styles.highlight}>App.tsx</Text> to change
-                  this screen and then come back to see your edits.
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>See Your Changes</Text>
-                <Text style={styles.sectionDescription}>
-                  <ReloadInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Debug</Text>
-                <Text style={styles.sectionDescription}>
-                  <DebugInstructions />
-                </Text>
-              </View>
-              <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Learn More</Text>
-                <Text style={styles.sectionDescription}>
-                  Read the docs to discover what to do next:
-                </Text>
-              </View>
-              <LearnMoreLinks />
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </>
-    </NavigationContainer>
+    <View style={style.home}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() =>
+          navigation.navigate('Details', {
+            itemId: 86,
+            otherParam: 'anything you want here',
+          })
+        }
+      />
+    </View>
+  );
+};
+const DetailsScreen = ({route, navigation}) => {
+  const {itemId} = route.params;
+  const {otherParam} = route.params;
+  return (
+    <View style={style.details}>
+      <Text>Details Screen</Text>
+      <Text>itemId:{JSON.stringify(itemId)}</Text>
+      <Text>otherParam:{JSON.stringify(otherParam)}</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() =>
+          navigation.push('Details', {
+            itemId: Math.floor(Math.random() * 100),
+          })
+        }
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'My home',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerRight: () => (
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#fff"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const style = StyleSheet.create({
+  home: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  details: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
