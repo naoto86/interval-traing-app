@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
+import colors from '@src/style/colors';
 
 export type TimeInputProps = {
   label: string;
@@ -16,6 +17,7 @@ export type TimeInputProps = {
   >;
   errorMsg: string;
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
+  isAllowedZeroSecond?: boolean;
 };
 
 const TimeInput = (props: TimeInputProps) => {
@@ -30,15 +32,16 @@ const TimeInput = (props: TimeInputProps) => {
     }
 
     const numberValue = Number(changedValue);
-    if (isMinutes) {
+    if (isMinutes || props.isAllowedZeroSecond) {
       if (numberValue > 60) {
-        props.setErrorMsg('分には60までの数値を入れてください');
+        props.setErrorMsg('60までの数値を入れてください');
         return false;
       }
     } else {
       if (numberValue > 60 || numberValue <= 0) {
-        props.setErrorMsg('秒には1から60までの数値を入れてください');
-        return false;
+        props.setErrorMsg('1から60までの数値を入れてください');
+        //ここでfalseを返すと入力しづらいのでエラー文入れるだけで、trueにする
+        return true;
       }
     }
     if (!Number.isInteger(numberValue)) {
@@ -53,16 +56,17 @@ const TimeInput = (props: TimeInputProps) => {
     rapper: {flexDirection: 'row'},
     label: {
       fontSize: props.fontSize,
+      color: 'white',
     },
     minutes: {
       alignItems: 'center',
-      backgroundColor: '#DDDDDD',
+      backgroundColor: colors.lightGray,
       paddingLeft: 6,
       fontSize: props.fontSize,
     },
     seconds: {
       alignItems: 'center',
-      backgroundColor: '#DDDDDD',
+      backgroundColor: colors.lightGray,
       paddingRight: 6,
       fontSize: props.fontSize,
     },
@@ -106,6 +110,9 @@ const TimeInput = (props: TimeInputProps) => {
       </TouchableHighlight>
     </View>
   );
+};
+TimeInput.defaultProps = {
+  isAllowedZeroSecond: false,
 };
 
 export default TimeInput;
