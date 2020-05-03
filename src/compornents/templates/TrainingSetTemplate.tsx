@@ -40,7 +40,13 @@ const TrainingSetTemplate = () => {
         <ExerciseTimeInput />
         <RestTimeInput />
         <RoundInput {...roundInputProps} />
-        <Button title={'test'} />
+        <Button
+          title={'決定'}
+          type="outline"
+          containerStyle={style.buttonContainer}
+          titleStyle={style.buttonTitle}
+          buttonStyle={style.button}
+        />
       </View>
     </LinearGradient>
   );
@@ -77,6 +83,16 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    margin: 50,
+  },
+  buttonTitle: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  button: {
+    borderColor: 'white',
   },
 });
 
