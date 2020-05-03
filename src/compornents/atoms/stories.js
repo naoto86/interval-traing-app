@@ -5,31 +5,26 @@ import {storiesOf} from '@storybook/react-native';
 
 // import Welcome from './Welcome';
 import TimeInput from './TimeInput';
+import RoundInput from './RoundInput';
 
-// storiesOf('Welcome', module).add('to Storybook', () => (
-//   <Welcome showApp={linkTo('Button')} />
-// ));
-
-// storiesOf('TimeInput', module).add('time input', () => {
-//   const dummyTimeInput = {
-//     label: 'テスト',
-//     fontSize: 30,
-//     time: {minutes: '00', seconds: '00'},
-//     setTime: () => {},
-//     errorMsg: 'テスト',
-//     setErrorMsg: () => {},
-//   };
-//   return <TimeInput {...dummyTimeInput} />;
-// });
-
-storiesOf('atoms', module).add('TimeInput', () => {
-  const dummyTimeInput = {
-    label: 'テスト',
-    fontSize: 30,
-    time: {minutes: '00', seconds: '00'},
-    setTime: () => {},
-    errorMsg: 'テスト',
-    setErrorMsg: () => {},
-  };
-  return <TimeInput {...dummyTimeInput} />;
-});
+storiesOf('atoms', module)
+  .add('TimeInput', () => {
+    const dummyTimeInput = {
+      label: 'テスト',
+      fontSize: 30,
+      time: {minutes: '00', seconds: '00'},
+      setTime: () => {},
+      errorMsg: 'テスト',
+      setErrorMsg: () => {},
+    };
+    return <TimeInput {...dummyTimeInput} />;
+  })
+  .add('RoundInput', () => {
+    const dummyProps = {
+      round: '08',
+      setRound: () => {},
+      errorMsg: 'テスト',
+      setErrorMsg: () => {},
+    };
+    return <RoundInput {...dummyProps} />;
+  });
