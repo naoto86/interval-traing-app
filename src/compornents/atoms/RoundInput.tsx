@@ -7,7 +7,6 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {Avatar} from 'react-native-elements';
-import colors from '@src/style/colors';
 
 export type RoundInputProps = {
   round: string;
@@ -29,12 +28,16 @@ const RoundInput = (props: RoundInputProps) => {
       <View style={style.rapper}>
         <Avatar
           rounded
-          icon={{name: 'rest', color: 'white', type: 'antdesign'}}
+          icon={{
+            name: 'rest',
+            type: 'antdesign',
+          }}
+          overlayContainerStyle={style.avatarContainer}
           size={40}
-          overlayContainerStyle={style.avterContainer}
+          activeOpacity={1}
         />
-        <Text style={style.label}>{`ラウンド回数:  `}</Text>
-        <TouchableHighlight>
+        <Text style={style.label}>{'ラウンド回数:  '}</Text>
+        <TouchableHighlight style={style.inputContainer}>
           <TextInput
             style={style.input}
             maxLength={2}
@@ -65,17 +68,21 @@ const style = StyleSheet.create({
     fontSize: 25,
     color: 'white',
   },
+  avatarContainer: {
+    backgroundColor: '#00000000',
+  },
+  inputContainer: {
+    borderWidth: 2,
+    borderColor: 'white',
+  },
   input: {
     alignItems: 'center',
-    backgroundColor: colors.lightGray,
+    color: 'white',
     paddingLeft: 6,
     fontSize: 25,
   },
   error: {
     color: 'red',
-  },
-  avterContainer: {
-    backgroundColor: colors.lightBlue,
   },
 });
 

@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-import colors from '@src/style/colors';
 
 export type TimeInputProps = {
   label: string;
@@ -58,15 +57,19 @@ const TimeInput = (props: TimeInputProps) => {
       fontSize: props.fontSize,
       color: 'white',
     },
+    timeContainer: {
+      borderWidth: 2,
+      borderColor: 'white',
+    },
     minutes: {
       alignItems: 'center',
-      backgroundColor: colors.lightGray,
+      color: 'white',
       paddingLeft: 6,
       fontSize: props.fontSize,
     },
     seconds: {
       alignItems: 'center',
-      backgroundColor: colors.lightGray,
+      color: 'white',
       paddingRight: 6,
       fontSize: props.fontSize,
     },
@@ -75,7 +78,7 @@ const TimeInput = (props: TimeInputProps) => {
   return (
     <View style={style.rapper}>
       <Text style={style.label}>{`${props.label}(分:秒):  `}</Text>
-      <TouchableHighlight>
+      <TouchableHighlight style={style.timeContainer}>
         <TextInput
           style={style.minutes}
           maxLength={2}
@@ -92,7 +95,7 @@ const TimeInput = (props: TimeInputProps) => {
         />
       </TouchableHighlight>
       <Text style={style.label}>{':'}</Text>
-      <TouchableHighlight>
+      <TouchableHighlight style={style.timeContainer}>
         <TextInput
           style={style.seconds}
           maxLength={2}

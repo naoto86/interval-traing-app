@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-elements';
 import Svg, {Ellipse} from 'react-native-svg';
+import LinearGradient from 'react-native-linear-gradient';
 import ExerciseTimeInput from '@src/compornents/molecules/ExerciseTimeInput.tsx';
 import PreparationTimeInput from '@src/compornents/molecules/PreparationTimeInput.tsx';
 import RestTimeInput from '@src/compornents/molecules/RestTimeInput.tsx';
 import RoundInput, {RoundInputProps} from '@src/compornents/atoms/RoundInput';
-import colors from '@src/style/colors';
-import LinearGradient from 'react-native-linear-gradient';
+import gradients from '@src/style/gradients';
 
 const TrainingSetTemplate = () => {
   const [round, setRound] = useState('08');
@@ -20,9 +20,7 @@ const TrainingSetTemplate = () => {
     setErrorMsg: setErrorMsg,
   };
   return (
-    <LinearGradient
-      colors={['#5433FF', '#20BDFF', '#A5FECB']}
-      style={style.linearGradient}>
+    <LinearGradient colors={gradients.rainbowBlue} style={style.linearGradient}>
       <View style={style.main}>
         <View style={style.ellipseStack}>
           <Svg viewBox="0 0 234.38 232.06" style={style.ellipse}>

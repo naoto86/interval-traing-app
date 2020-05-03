@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Avatar} from 'react-native-elements';
 import TimeInput, {TimeInputProps} from '@src/compornents/atoms/TimeInput.tsx';
 import {View, StyleSheet, Text} from 'react-native';
-import colors from '@src/style/colors';
 
 const ExerciseTimeInput = () => {
   const [time, setTime] = useState({minutes: '00', seconds: '06'});
@@ -25,7 +24,7 @@ const ExerciseTimeInput = () => {
           rounded
           icon={{name: 'directions-run', color: 'white'}}
           size={40}
-          overlayContainerStyle={style.avterContainer}
+          overlayContainerStyle={style.avatarContainer}
         />
         <TimeInput {...timeInputProps} />
       </View>
@@ -42,11 +41,11 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  avatarContainer: {
+    backgroundColor: '#00000000',
+  },
   error: {
     color: 'red',
-  },
-  avterContainer: {
-    backgroundColor: colors.lightBlue,
   },
 });
 
