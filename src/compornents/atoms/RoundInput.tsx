@@ -29,8 +29,8 @@ const RoundInput = (props: RoundInputProps) => {
         <Avatar
           rounded
           icon={{
-            name: 'rest',
-            type: 'antdesign',
+            name: 'repeat',
+            type: 'material-icons',
           }}
           overlayContainerStyle={style.avatarContainer}
           size={40}
