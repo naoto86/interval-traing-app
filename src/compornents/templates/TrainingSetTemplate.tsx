@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {Button} from 'react-native-elements';
-import Svg, {Ellipse} from 'react-native-svg';
+import {View, StyleSheet} from 'react-native';
+import {Button, Image} from 'react-native-elements';
+import Svg, {Circle} from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 import ExerciseTimeInput from '@src/compornents/molecules/ExerciseTimeInput.tsx';
 import PreparationTimeInput from '@src/compornents/molecules/PreparationTimeInput.tsx';
 import RestTimeInput from '@src/compornents/molecules/RestTimeInput.tsx';
 import RoundInput, {RoundInputProps} from '@src/compornents/atoms/RoundInput';
+import numbers from '@src/images/numbers/index';
 import gradients from '@src/style/gradients';
 
 const TrainingSetTemplate = () => {
@@ -19,22 +20,26 @@ const TrainingSetTemplate = () => {
     errorMsg: errorMsg,
     setErrorMsg: setErrorMsg,
   };
+  const colon = require('../../images/colon.png');
   return (
     <LinearGradient colors={gradients.rainbowBlue} style={style.linearGradient}>
       <View style={style.main}>
-        <View style={style.ellipseStack}>
-          <Svg viewBox="0 0 234.38 232.06" style={style.ellipse}>
-            <Ellipse
-              strokeWidth={1}
-              fill="rgba(230, 230, 230,1)"
-              stroke="rgba(230, 230, 230,1)"
-              cx={117}
-              cy={116}
-              rx={117}
-              ry={116}
+        <View style={style.circleStack}>
+          <Svg viewBox="0 0 234.38 232.06" style={style.circle}>
+            <Circle
+              cx="118"
+              cy="118"
+              r="115"
+              stroke="white"
+              strokeWidth="2.5"
+              fill="none"
             />
           </Svg>
-          <Text style={style.loremIpsum}>Lorem Ipsum</Text>
+          <Image source={numbers[0]} style={style.numberImage} />
+          <Image source={numbers[0]} style={style.numberImage} />
+          <Image source={colon} style={style.colonImage} />
+          <Image source={numbers[0]} style={style.numberImage} />
+          <Image source={numbers[0]} style={style.numberImage} />
         </View>
         <PreparationTimeInput />
         <ExerciseTimeInput />
@@ -62,10 +67,10 @@ const style = StyleSheet.create({
   main: {
     flex: 1,
   },
-  ellipse: {
+  circle: {
     top: 0,
-    width: 234,
-    height: 234,
+    width: 240,
+    height: 240,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,13 +82,15 @@ const style = StyleSheet.create({
     color: '#121212',
     position: 'absolute',
   },
-  ellipseStack: {
+  circleStack: {
     marginTop: 40,
     height: 250,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  numberImage: {width: 40, height: 40},
+  colonImage: {width: 20, height: 40},
   buttonContainer: {
     margin: 50,
   },
