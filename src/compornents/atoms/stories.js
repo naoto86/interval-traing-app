@@ -6,6 +6,7 @@ import {storiesOf} from '@storybook/react-native';
 // import Welcome from './Welcome';
 import TimeInput from './TimeInput';
 import RoundInput from './RoundInput';
+import TrainingMenuModal from './TrainingMenuModal';
 
 storiesOf('atoms', module)
   .add('TimeInput', () => {
@@ -27,4 +28,7 @@ storiesOf('atoms', module)
       setErrorMsg: () => {},
     };
     return <RoundInput {...dummyProps} />;
+  })
+  .add('TrainingMenuModal', () => {
+    return <TrainingMenuModal />;
   });
