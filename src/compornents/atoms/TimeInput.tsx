@@ -19,7 +19,7 @@ export type TimeInputProps = {
   isAllowedZeroSecond?: boolean;
 };
 
-const TimeInput = (props: TimeInputProps) => {
+const TimeInput: React.FC<TimeInputProps> = (props) => {
   const validateChangedValue = (changedValue: string, isMinutes: boolean) => {
     if (isNaN(Number(changedValue))) {
       props.setErrorMsg('数値を入力してください');

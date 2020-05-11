@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Avatar} from 'react-native-elements';
 import TimeInput, {TimeInputProps} from '@src/compornents/atoms/TimeInput.tsx';
 import {View, StyleSheet, Text} from 'react-native';
 
-const ExerciseTimeInput = () => {
-  const [time, setTime] = useState({minutes: '00', seconds: '06'});
-  const [errorMsg, setErrorMsg] = useState('');
-  0;
+export type RestTimeInputProps = Pick<
+  TimeInputProps,
+  'time' | 'setTime' | 'errorMsg' | 'setErrorMsg'
+>;
+
+const RestTimeInput = (props: RestTimeInputProps) => {
   const size = 25;
 
   const timeInputProps: TimeInputProps = {
     label: '休憩',
     fontSize: size,
-    time: time,
-    setTime: setTime,
-    errorMsg: errorMsg,
-    setErrorMsg: setErrorMsg,
+    time: props.time,
+    setTime: props.setTime,
+    errorMsg: props.errorMsg,
+    setErrorMsg: props.setErrorMsg,
   };
 
   return (
@@ -30,7 +32,7 @@ const ExerciseTimeInput = () => {
         <TimeInput {...timeInputProps} />
       </View>
       <View style={style.rapper}>
-        <Text style={style.error}>{errorMsg}</Text>
+        <Text style={style.error}>{props.errorMsg}</Text>
       </View>
     </View>
   );
@@ -50,4 +52,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default ExerciseTimeInput;
+export default RestTimeInput;

@@ -2,31 +2,44 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Divider} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
-import ExerciseTimeInput from '@src/compornents/molecules/ExerciseTimeInput.tsx';
-import PreparationTimeInput from '@src/compornents/molecules/PreparationTimeInput.tsx';
-import RestTimeInput from '@src/compornents/molecules/RestTimeInput.tsx';
+import ExerciseTimeInput, {
+  ExerciseTimeInputProps,
+} from '@src/compornents/molecules/ExerciseTimeInput.tsx';
+import PreparationTimeInput, {
+  PreparationTimeInputProps,
+} from '@src/compornents/molecules/PreparationTimeInput.tsx';
+import RestTimeInput, {
+  RestTimeInputProps,
+} from '@src/compornents/molecules/RestTimeInput.tsx';
 import RoundInput, {RoundInputProps} from '@src/compornents/atoms/RoundInput';
+import TrainingMenuModal, {
+  TrainingMenuModalProps,
+} from '@src/compornents/atoms/TrainingMenuModal.tsx';
 import TimeCircle from '@src/compornents/atoms/TimeCircle';
 import gradients from '@src/style/gradients';
 
-const TrainingSetTemplate = () => {
-  const [round, setRound] = useState('08');
-  const [errorMsg, setErrorMsg] = useState('');
+export type TrainingSetTemplateProps = {
+  preparationTime: PreparationTimeInputProps;
+  exerciseTime: ExerciseTimeInputProps;
+  restTime: RestTimeInputProps;
+  round: RoundInputProps;
+  trainingMenu: Pick<
+    TrainingMenuModalProps,
+    'menuMode' | 'setMenuMode' | 'trainingMenus' | 'setTrainingMenus'
+  >;
+};
 
-  const roundInputProps: RoundInputProps = {
-    round: round,
-    setRound: setRound,
-    errorMsg: errorMsg,
-    setErrorMsg: setErrorMsg,
-  };
+const TrainingSetTemplate = (props: TrainingSetTemplateProps) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <LinearGradient colors={gradients.rainbowBlue} style={style.linearGradient}>
       <View style={style.main}>
         <TimeCircle />
-        <PreparationTimeInput />
-        <ExerciseTimeInput />
-        <RestTimeInput />
-        <RoundInput {...roundInputProps} />
+        <PreparationTimeInput {...props.preparationTime} />
+        <ExerciseTimeInput {...props.exerciseTime} />
+        <RestTimeInput {...props.restTime} />
+        <RoundInput {...props.round} />
         <Divider style={style.divider} />
         <View style={style.buttonRow}>
           <Button
@@ -36,6 +49,9 @@ const TrainingSetTemplate = () => {
             containerStyle={style.buttonContainer}
             titleStyle={style.buttonTitle}
             buttonStyle={style.button}
+            onPress={() => {
+              setModalVisible(true);
+            }}
           />
           <Button
             title={'決定'}
@@ -45,6 +61,11 @@ const TrainingSetTemplate = () => {
             buttonStyle={style.button}
           />
         </View>
+        <TrainingMenuModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          {...props.trainingMenu}
+        />
       </View>
     </LinearGradient>
   );

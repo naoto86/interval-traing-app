@@ -9,8 +9,8 @@ import {
 import {Avatar} from 'react-native-elements';
 
 export type RoundInputProps = {
-  round: string;
-  setRound: React.Dispatch<React.SetStateAction<string>>;
+  round: number;
+  setRound: React.Dispatch<React.SetStateAction<number>>;
   errorMsg: string;
   setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -42,10 +42,10 @@ const RoundInput = (props: RoundInputProps) => {
             style={style.input}
             maxLength={2}
             keyboardType={'numeric'}
-            value={props.round}
+            value={String(props.round)}
             onChangeText={(round: string) => {
               if (validateChangedValue(round)) {
-                props.setRound(round);
+                props.setRound(Number(round));
               }
             }}
           />
