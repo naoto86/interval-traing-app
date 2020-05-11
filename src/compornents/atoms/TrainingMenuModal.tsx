@@ -1,6 +1,13 @@
 import React, {useState} from 'react';
 import {Modal, View, Text, StyleSheet} from 'react-native';
-import {Card, Input, Icon, Button, ButtonGroup} from 'react-native-elements';
+import {
+  Card,
+  Input,
+  Icon,
+  Button,
+  ButtonGroup,
+  ListItem,
+} from 'react-native-elements';
 
 export type TrainingMenuModalProps = {
   modalVisible: boolean;
@@ -24,6 +31,7 @@ export const MULTIPLE_MODE = {
 export const MENU_MODES = [ONLY_ONE_MODE, MULTIPLE_MODE];
 
 const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
+  console.log(props.trainingMenus);
   const buttons = MENU_MODES.map((m) => m.name);
   const [selectedMenuMode, setSelectedMenuMode] = useState(props.menuMode);
   const mainColor = '#1E9600';
@@ -43,7 +51,18 @@ const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
     if (si === 0) {
       return <Input placeholder="aaaaa" />;
     } else {
-      return <Input placeholder="bbbbbb" />;
+      return (
+        <View>
+          {props.trainingMenus.map((m, i) => {
+            return (
+              <ListItem
+                key={i}
+                Component={() => <Input label={`${m.no}ラウンド目`} />}
+              />
+            );
+          })}
+        </View>
+      );
     }
   };
   return (

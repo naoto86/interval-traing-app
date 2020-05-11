@@ -18,7 +18,7 @@ const RenderTrainingSetTemplate = () => {
   const restTime = useTimeInputState('00', '10');
   const round = useRoundInputState();
   let menus = [];
-  for (let index = 1; index < round.round; index++) {
+  for (let index = 1; index <= round.round; index++) {
     let mock = {no: index, menu: ''};
     menus.push(mock);
   }
@@ -26,6 +26,7 @@ const RenderTrainingSetTemplate = () => {
     ...useMenuModeState(0),
     ...useTrainingMenusState(menus),
   };
+  console.log(trainingMenu);
   return (
     <TrainingSetTemplate
       preparationTime={preparationTime}
