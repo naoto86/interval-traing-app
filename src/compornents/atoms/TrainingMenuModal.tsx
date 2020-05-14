@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Modal, View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {
   Card,
   Input,
@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   ListItem,
 } from 'react-native-elements';
+import Modal from 'react-native-modal';
 
 export type TrainingMenuModalProps = {
   modalVisible: boolean;
@@ -36,6 +37,11 @@ const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
   const [selectedMenuMode, setSelectedMenuMode] = useState(props.menuMode);
   const mainColor = '#1E9600';
   const styles = StyleSheet.create({
+    centeredView: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+    },
     textColor: {
       color: mainColor,
     },
@@ -66,37 +72,35 @@ const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
     }
   };
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={props.modalVisible}
-      onRequestClose={() => {
-        props.setModalVisible(false);
-      }}>
-      <Card title="トレーニングメニュー" titleStyle={styles.textColor}>
-        <Text style={styles.textColor}>
-          ラウンドごとにするトレーニングをメモできます。
-        </Text>
-        <ButtonGroup
-          onPress={setSelectedMenuMode}
-          selectedIndex={selectedMenuMode}
-          buttons={buttons}
-          textStyle={styles.textColor}
-          selectedButtonStyle={styles.buttonBackgroundColor}
-        />
-        <View style={styles.customMargin}>{RenderInput(selectedMenuMode)}</View>
-        <Button
-          buttonStyle={styles.buttonBorder}
-          titleStyle={styles.textColor}
-          type="outline"
-          icon={<Icon name="code" color="#ffffff" />}
-          onPress={() => {
-            props.setModalVisible(false);
-          }}
-          title="閉じる"
-        />
-      </Card>
-    </Modal>
+    <View style={styles.centeredView}>
+      <Modal isVisible={props.modalVisible}>
+        <Card title="トレーニングメニュー" titleStyle={styles.textColor}>
+          <Text style={styles.textColor}>
+            ラウンドごとにするトレーニングをメモできます。
+          </Text>
+          <ButtonGroup
+            onPress={setSelectedMenuMode}
+            selectedIndex={selectedMenuMode}
+            buttons={buttons}
+            textStyle={styles.textColor}
+            selectedButtonStyle={styles.buttonBackgroundColor}
+          />
+          <View style={styles.customMargin}>
+            {RenderInput(selectedMenuMode)}
+          </View>
+          <Button
+            buttonStyle={styles.buttonBorder}
+            titleStyle={styles.textColor}
+            type="outline"
+            icon={<Icon name="code" color="#ffffff" />}
+            onPress={() => {
+              props.setModalVisible(false);
+            }}
+            title="閉じる"
+          />
+        </Card>
+      </Modal>
+    </View>
   );
 };
 
