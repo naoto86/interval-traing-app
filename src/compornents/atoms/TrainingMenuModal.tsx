@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {
   Card,
   Input,
@@ -52,6 +52,9 @@ const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
       borderColor: mainColor,
     },
     customMargin: {marginBottom: 10},
+    listView: {
+      height: 500,
+    },
   });
   const RenderInput = (si: number) => {
     if (si === 0) {
@@ -59,14 +62,16 @@ const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
     } else {
       return (
         <View>
-          {props.trainingMenus.map((m, i) => {
-            return (
-              <ListItem
-                key={i}
-                Component={() => <Input label={`${m.no}ラウンド目`} />}
-              />
-            );
-          })}
+          <ScrollView style={styles.listView}>
+            {props.trainingMenus.map((m, i) => {
+              return (
+                <ListItem
+                  key={i}
+                  Component={() => <Input label={`${m.no}ラウンド目`} />}
+                />
+              );
+            })}
+          </ScrollView>
         </View>
       );
     }
