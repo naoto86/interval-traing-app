@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-type TrainingMenus = {no: number; menu: string};
-const useTrainingMenusState = (prop: TrainingMenus[]) => {
+export type TrainingMenu = {no: number; menu: string};
+const useTrainingMenusState = (prop: TrainingMenu[]) => {
   const [trainingMenus, setTrainingMenus] = useState(prop);
   return {
     trainingMenus,

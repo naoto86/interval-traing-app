@@ -32,7 +32,6 @@ export const MULTIPLE_MODE = {
 export const MENU_MODES = [ONLY_ONE_MODE, MULTIPLE_MODE];
 
 const TrainingMenuModal: React.FC<TrainingMenuModalProps> = (props) => {
-  console.log(props.trainingMenus);
   const buttons = MENU_MODES.map((m) => m.name);
   const [selectedMenuMode, setSelectedMenuMode] = useState(props.menuMode);
   const mainColor = '#1E9600';

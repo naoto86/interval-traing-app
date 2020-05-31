@@ -39,7 +39,10 @@ const TrainingSetTemplate = (props: TrainingSetTemplateProps) => {
         <PreparationTimeInput {...props.preparationTime} />
         <ExerciseTimeInput {...props.exerciseTime} />
         <RestTimeInput {...props.restTime} />
-        <RoundInput {...props.round} />
+        <RoundInput
+          {...props.round}
+          setTrainingMenus={props.trainingMenu.setTrainingMenus}
+        />
         <Divider style={style.divider} />
         <View style={style.buttonRow}>
           <Button
